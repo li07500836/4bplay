@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>南投埔里兩天一夜親子遊：超萌動物與放電之旅</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        warmbg: '#fdfbf7',
+                        primary: '#f59e0b',
+                        secondary: '#10b981',
+                        darktext: '#1f2937',
+                        cardbg: '#ffffff'
+                    },
+                    fontFamily: {
+                        sans: ['"Noto Sans TC"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #fdfbf7;
+            color: #1f2937;
+        }
+        .fade-in {
+            animation: fadeIn 0.4s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .timeline-item {
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .timeline-item:hover {
+            background-color: #fffbeb;
+            border-left-color: #f59e0b;
+        }
+        .timeline-item.active {
+            background-color: #fffbeb;
+            border-left-color: #f59e0b;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Chosen Palette: Warm Neutrals (Background), Amber (Primary/Accent), Emerald (Secondary/Nature), Dark Gray (Text) -->
+    <!-- Application Structure Plan: A single-page dashboard featuring a hero summary, an overview section with analytical charts (demographics and activity types), and an interactive split-view itinerary (timeline navigation on the left, detailed content on the right). This structure was chosen to allow users (parents/organizers) to quickly grasp the group composition and trip balance, while providing a drill-down method to explore specific schedule details without being overwhelmed by a massive wall of text. -->
+    <!-- Visualization & Content Choices: 1. Demographics -> Goal: Inform -> Doughnut Chart (Chart.js) -> Interactive hover -> Justification: Quickly visualizes the adult-to-child ratio for planning context. 2. Activity Distribution -> Goal: Organize/Analyze -> Radar Chart (Chart.js) -> Interactive hover -> Justification: Shows the balance of food, play, nature, and creative activities, ensuring the trip meets its "loose and diverse" goal. 3. Itinerary -> Goal: Inform/Organize -> Interactive Timeline UI (HTML/JS) -> Clickable nodes -> Justification: Better than a static list, allows focus on one activity at a time. No SVG used. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="text-xl font-bold text-primary flex items-center gap-2">
+                <span>🎒</span> 埔里親子遊指南
+            </div>
+            <div class="flex gap-4 text-sm font-medium">
+                <a href="#itinerary" class="hover:text-primary transition-colors">互動時刻表</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="max-w-6xl mx-auto px-4 py-12 md:py-20 text-center">
+        <div class="inline-block bg-amber-100 text-amber-800 px-4 py-1 rounded-full text-sm font-bold mb-4 shadow-sm">
+            👨‍👩‍👧‍👦 11位大人 ＋ 6位小朋友 (4-6歲)
+        </div>
+        <h1 class="text-3xl md:text-5xl font-extrabold mb-6 leading-tight text-darktext">
+            南投埔里兩天一夜親子遊<br>
+            <span class="text-primary">超萌動物與放電之旅 🐾🏰</span>
+        </h1>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+            這是一趟專為大家族量身打造的埔里親子行程！主打行程寬鬆、不拉車，將體能放電、可愛動物互動、創意啟發與經典在地美食完美結合。準備好跟著我們的互動指南一起出發了嗎？
+        </p>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 pb-20">
+
+        <section id="itinerary" class="mb-16">
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold border-b-4 border-secondary inline-block pb-2 mb-4">互動式時刻表</h2>
+                <p class="text-gray-600">
+                    本區塊是旅程的核心導航。請先選擇上方的「Day 1」或「Day 2」按鈕切換天數，接著點擊左側列表中的個別行程卡片。右側的資訊面板將會動態更新，顯示該行程的詳細說明、小提醒與建議。這樣的設計能幫助您專注於當下的活動，而不會被長篇大論的文字干擾。
+                </p>
+            </div>
+
+            <div class="bg-cardbg rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+                
+                <div class="flex border-b border-gray-200 bg-gray-50">
+                    <button id="btn-day1" class="flex-1 py-4 text-center font-bold text-lg bg-white border-b-2 border-primary text-primary hover:bg-gray-50 transition-colors" onclick="switchDay(1)">
+                        🗓️ Day 1：盡情放電與在地美食
+                    </button>
+                    <button id="btn-day2" class="flex-1 py-4 text-center font-bold text-lg text-gray-500 border-b-2 border-transparent hover:bg-gray-50 transition-colors" onclick="switchDay(2)">
+                        🗓️ Day 2：超萌動物互動與創意啟發
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 min-h-[500px]">
+                    
+                    <div class="col-span-1 border-r border-gray-200 bg-gray-50/50 p-4 overflow-y-auto" id="timeline-list">
+                    </div>
+
+                    <div class="col-span-1 md:col-span-2 p-6 md:p-10 bg-white flex flex-col justify-start items-start fade-in h-[600px] overflow-y-auto" id="detail-panel">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="text-5xl" id="detail-icon">👈</div>
+                            <div>
+                                <h3 class="text-2xl md:text-3xl font-bold text-darktext" id="detail-title">請選擇左側行程</h3>
+                                <div class="inline-block bg-gray-200 text-gray-700 px-3 py-1 rounded text-sm font-medium mt-2" id="detail-time">--:--</div>
+                            </div>
+                        </div>
+
+                        <div class="w-full mb-6">
+                            <h4 class="text-lg font-bold text-primary mb-2 flex items-center gap-2"><span>📝</span> 行程說明</h4>
+                            <p class="text-gray-600 leading-relaxed text-lg" id="detail-desc">點擊左側時刻表中的項目，這裡會顯示詳細的活動內容與規劃建議。</p>
+                        </div>
+                        
+                        <div class="bg-amber-50 border-l-4 border-amber-400 p-4 rounded-r-lg w-full mb-6 shrink-0" id="detail-tips-container" style="display: none;">
+                            <h4 class="text-md font-bold text-amber-800 mb-1 flex items-center gap-2"><span>💡</span> 溫馨小提醒 / 推薦</h4>
+                            <p class="text-amber-900 leading-relaxed" id="detail-tips"></p>
+                        </div>
+
+                        <!-- 動態 Google Map -->
+                        <div class="w-full rounded-xl overflow-hidden border border-gray-200 hidden shrink-0 mb-4" id="detail-map-container">
+                            <h4 class="text-md font-bold text-secondary bg-gray-50 p-3 border-b border-gray-200 flex items-center gap-2"><span>📍</span> 景點位置地圖</h4>
+                            <iframe id="detail-map" width="100%" height="250" frameborder="0" style="border:0" allowfullscreen loading="lazy"></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 整日路線地圖區塊 -->
+                <div class="p-6 border-t border-gray-200 bg-gray-50/80">
+                    <h4 class="text-xl font-bold text-darktext mb-4 flex items-center gap-2" id="daily-route-title">🗺️ Day 1 完整行程路線圖</h4>
+                    <div class="w-full h-64 md:h-96 rounded-xl overflow-hidden border border-gray-300 shadow-sm bg-gray-200">
+                        <iframe id="daily-route-map" width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen loading="lazy"></iframe>
+                    </div>
+                    <div class="mt-4 text-right">
+                        <a id="daily-route-link" href="#" target="_blank" class="inline-flex items-center gap-1 bg-primary text-white px-5 py-2 rounded-lg font-bold hover:bg-amber-600 transition-colors shadow-sm">
+                            <span>在手機 Google Maps 開啟導航</span> ↗️
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="mt-4 text-sm text-gray-500 text-center bg-gray-100 py-2 rounded-lg inline-block px-4">
+                ⚠️ 建議出發日期需包含 <strong>週五、週六或週日</strong>，以配合埔里城觀光夜市及部分園區營業時間。
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-darktext text-white py-8 text-center">
+        <p class="mb-2">🎒 南投埔里兩天一夜親子遊互動指南</p>
+        <p class="text-sm text-gray-400">為 17 人的大家族帶來最完美的回憶</p>
+    </footer>
+
+    <script>
+        const itineraryData = {
+            day1: [
+                { id: 'd1-1', time: "13:00 - 14:00", title: "出發 ➡️ 埔里市區午晚餐", desc: "早上從溫暖的家出發，車程中可以讓小朋友睡個回籠覺。抵達埔里大約是中午過後，第一站先直奔埔里市區填飽肚子！這時候最適合來點在地小吃，不用花太多時間又能品嚐特色。大家吃飽喝足後，就能以最好的狀態迎接下午的重頭戲——公園放電之旅！", tips: "推薦小吃：李仔哥爌肉飯、埔里肉圓。", icon: "🍜", mapQuery: "李仔哥爌肉飯 埔里" },
+                { id: 'd1-2', time: "14:30 - 16:30", title: "福興溫泉區親子公園", desc: "經過車程，小朋友現在絕對是電力滿滿！來到這個廣受好評的共融式遊戲場，立刻放生孩子們去挑戰大型攀爬網和超高溜滑梯，或是體驗刺激的滑索。對於 4-6 歲的幼兒來說，旁邊那片超大沙坑絕對是他們的快樂天堂。最貼心的是，公園旁設有免費的溫泉泡腳池，長輩和大人們可以一邊泡著暖呼呼的溫泉放鬆雙腿，一邊輕鬆看顧在視線範圍內玩耍的小孩，大人小孩都滿足！", tips: "建議準備玩沙工具與換洗衣物。", icon: "🛝", mapQuery: "福興溫泉區親子公園 南投" },
+                { id: 'd1-3', time: "17:00", title: "承萬尊爵渡假酒店 Check-in", desc: "傍晚時分，驅車前往今晚下榻的『承萬尊爵渡假酒店』。這是一間對親子超級友善的飯店。辦理完入住手續、將行李放進寬敞的房間後，如果孩子們的電力還沒放完（通常是還沒！），請直接帶他們前往位於 3 樓的『星際遊戲室』！這裡有超過百坪的室內空間，巨大的球池、多層次溜滑梯和積木區，絕對會讓小朋友玩到不想回房間，徹底耗盡他們最後的體力。", tips: "如果剛剛在公園還沒放足電，小朋友可以在飯店繼續玩樂！記得要穿著襪子才能進入遊戲室喔。", icon: "🏨", mapQuery: "承萬尊爵渡假酒店 南投" },
+                { id: 'd1-4', time: "18:30 - 20:30", title: "埔里城觀光夜市 (晚餐)", desc: "稍微梳洗後，晚上大陣仗出發前往『埔里城觀光夜市』！逛夜市是大家族出遊最棒的晚餐選擇，不用煩惱要吃什麼合菜，大家可以自由解散、各自買喜歡的地瓜球、烤肉、蚵仔煎或是木瓜牛奶。吃飽後，再帶小朋友去玩幾局打彈珠、套圈圈或是釣水球。感受在地熱鬧的氣氛後，回到飯店保證小朋友秒睡，大人也能享受片刻的寧靜夜晚。", tips: "營業時間：每週五、六、日", icon: "🍢", mapQuery: "埔里城觀光夜市 南投" }
+            ],
+            day2: [
+                { id: 'd2-1', time: "08:00 - 09:30", title: "飯店自助早餐", desc: "早安！經過一夜好眠，全家一起前往挑高寬敞的餐廳享用 Buffet 自助早餐。飯店貼心準備了豐富的菜色，長輩可以享用熱粥與在地蔬菜，年輕人有各式現炒與麵食，而小朋友最愛的炸物小點、麥片和鮮奶也應有盡有。推薦大人一定要嚐嚐現煮的埔里米粉或黃麵，淋上香噴噴的肉燥，暖胃又滿足。大家可以悠閒地吃到飽，再回房間整理行李退房。", tips: "推薦菜色：大人必嚐古早味滷肉飯、DIY現煮麵區；小朋友則有炸地瓜球、麥克雞塊等最愛。", icon: "🍳", mapQuery: "承萬尊爵渡假酒店 南投" },
+                { id: 'd2-2', time: "10:00 - 12:00", title: "水与松萌萌園", desc: "退房後的第一站，來到能讓大人小孩都發出少女尖叫的『水与松萌萌園』！這個年紀的小朋友對動物充滿了好奇心。在這裡，你們可以拿著牧草和紅蘿蔔，近距離餵食呆萌的水豚君，或是跟溫馴的羊駝（草泥馬）互動拍照。園區環境維護得非常乾淨，還種植了整排美麗的落羽松，非常適合在這裡拍下 17 人的家族大合照，留下珍貴的回憶。", tips: "假日人潮可能較多，建議一退房就先前往，可以避開擁擠時段。", icon: "🦙", mapQuery: "水与松萌萌園 南投" },
+                { id: 'd2-3', time: "12:30 - 14:00", title: "市區午餐（下午餐）", desc: "離開動物園後，大家肚子應該也餓了。可以回到埔里市區，或是直接在前往下一個景點的順遊路線上，找一間寬敞的庭園餐廳或小吃店用餐。這段時間也是讓玩了一整個上午的小朋友稍微在車上或餐廳裡靜下來休息、充電的好時機，為下午的創意行程做準備。", tips: "17人用餐建議出發前一天先打電話預訂餐廳位置。", icon: "🍽️", mapQuery: "埔里鎮 南投 餐廳" },
+                { id: 'd2-4', time: "14:30 - 16:00", title: "機器人創藝園區", desc: "下午的行程轉換風格，帶大家來到超級酷炫的『機器人創藝園區』！這裡滿滿都是利用廢棄汽車零件、五金金屬重新焊接打造的巨大機器人。對於喜歡車子或變形金剛的小朋友來說，這裡簡直是夢幻基地。家長可以帶著孩子觀察這些金屬原本可能是什麼零件，藉此激發他們的想像力與環保意識，是個極具視覺震撼又富含教育意義的特色景點。", tips: "營業時間：通常為每週六、日", icon: "🤖", mapQuery: "機器人創藝園區 埔里" },
+                { id: 'd2-5', time: "16:30 - 17:30", title: "埔里酒廠", desc: "旅程的尾聲，當然要留給最經典的『埔里酒廠』！這個時段來剛好可以避開正中午的烈日。大家可以在廣大的園區內悠閒散步，長輩可以進去展售中心採買伴手禮。最重要的是，一定要買幾根剛出爐、香氣四溢的紹興香腸大家分著吃，再配上一支小朋友也能吃的清涼酒香（無酒精）冰棒，享受全家聚在一起的甜蜜下午茶時光。", tips: "必吃推薦：紹興香腸、酒香冰棒。", icon: "🌭", mapQuery: "埔里酒廠 南投" },
+                { id: 'd2-6', time: "17:30", title: "帶著滿滿回憶，準備回家！", desc: "吃完冰棒、上完洗手間，這趟豐富的兩天一夜南投埔里之旅正式畫下句點！這兩天裡，小朋友體驗了溜滑梯、沙坑、餵食水豚君和看機器人，大人們也享受了溫泉泡腳和在地美食。上了車後，徹底放完電的小朋友大概不用十分鐘就會進入夢鄉，大人們也能帶著滿滿的照片與回憶，平平安安地踏上歸途。期待下次的家族大旅行！", tips: "行車注意安全，期待下次再遊！", icon: "🚗", mapQuery: "" }
+            ]
+        };
+
+        // 整日行程的 Google Maps 路線資料
+        const routeData = {
+            1: {
+                title: "🗺️ Day 1 完整行程路線圖",
+                // 使用 saddr (起點) 與 daddr (終點及中繼點) 產生內嵌路線圖
+                embedUrl: "https://maps.google.com/maps?saddr=李仔哥爌肉飯+埔里&daddr=福興溫泉區親子公園+to:承萬尊爵渡假酒店+to:埔里城觀光夜市+南投&output=embed",
+                // 產生供手機直接開啟導航的連結
+                linkUrl: "https://www.google.com/maps/dir/李仔哥爌肉飯/福興溫泉區親子公園/承萬尊爵渡假酒店/埔里城觀光夜市/"
+            },
+            2: {
+                title: "🗺️ Day 2 完整行程路線圖",
+                embedUrl: "https://maps.google.com/maps?saddr=承萬尊爵渡假酒店+南投&daddr=水与松萌萌園+to:埔里鎮+to:機器人創藝園區+to:埔里酒廠&output=embed",
+                linkUrl: "https://www.google.com/maps/dir/承萬尊爵渡假酒店/水与松萌萌園/埔里鎮/機器人創藝園區/埔里酒廠/"
+            }
+        };
+
+        let currentActiveId = null;
+
+        function renderTimeline(dayNumber) {
+            const listContainer = document.getElementById('timeline-list');
+            listContainer.innerHTML = '';
+            const items = dayNumber === 1 ? itineraryData.day1 : itineraryData.day2;
+
+            items.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = `timeline-item border-l-4 border-gray-300 pl-4 py-4 mb-2 rounded-r bg-white shadow-sm flex flex-col gap-1`;
+                div.id = `item-${item.id}`;
+                div.onclick = () => selectItem(item, dayNumber);
+
+                div.innerHTML = `
+                    <span class="text-xs font-bold text-gray-500 bg-gray-100 inline-block px-2 py-1 rounded w-max">${item.time}</span>
+                    <span class="text-lg font-bold text-darktext flex items-center gap-2">${item.icon} ${item.title}</span>
+                `;
+                listContainer.appendChild(div);
+            });
+
+            if (items.length > 0) {
+                selectItem(items[0], dayNumber);
+            }
+        }
+
+        function selectItem(item, dayNumber) {
+            const panel = document.getElementById('detail-panel');
+            
+            panel.classList.remove('fade-in');
+            void panel.offsetWidth; 
+            panel.classList.add('fade-in');
+
+            document.getElementById('detail-icon').textContent = item.icon;
+            document.getElementById('detail-title').textContent = item.title;
+            document.getElementById('detail-time').textContent = item.time;
+            document.getElementById('detail-desc').textContent = item.desc;
+
+            // 處理 Google Map 顯示
+            const mapContainer = document.getElementById('detail-map-container');
+            const mapEl = document.getElementById('detail-map');
+            if (item.mapQuery) {
+                // 使用 Google Maps 的 iframe embed，無需 API key 即可進行基礎地點搜尋展示
+                mapEl.src = `https://maps.google.com/maps?q=${encodeURIComponent(item.mapQuery)}&t=&z=14&ie=UTF8&iwloc=&output=embed`;
+                mapContainer.classList.remove('hidden');
+            } else {
+                mapContainer.classList.add('hidden');
+            }
+            
+            const tipsContainer = document.getElementById('detail-tips-container');
+            const tipsEl = document.getElementById('detail-tips');
+            if (item.tips && item.tips.trim() !== '') {
+                tipsEl.textContent = item.tips;
+                tipsContainer.style.display = 'block';
+            } else {
+                tipsContainer.style.display = 'none';
+            }
+
+            if (currentActiveId) {
+                const oldActive = document.getElementById(`item-${currentActiveId}`);
+                if (oldActive) oldActive.classList.remove('active');
+            }
+            
+            const newActive = document.getElementById(`item-${item.id}`);
+            if (newActive) newActive.classList.add('active');
+            currentActiveId = item.id;
+        }
+
+        function switchDay(dayNumber) {
+            const btn1 = document.getElementById('btn-day1');
+            const btn2 = document.getElementById('btn-day2');
+
+            if (dayNumber === 1) {
+                btn1.classList.replace('text-gray-500', 'text-primary');
+                btn1.classList.replace('border-transparent', 'border-primary');
+                btn1.classList.replace('bg-gray-50', 'bg-white');
+                
+                btn2.classList.replace('text-primary', 'text-gray-500');
+                btn2.classList.replace('border-primary', 'border-transparent');
+                btn2.classList.replace('bg-white', 'bg-gray-50');
+            } else {
+                btn2.classList.replace('text-gray-500', 'text-primary');
+                btn2.classList.replace('border-transparent', 'border-primary');
+                btn2.classList.replace('bg-gray-50', 'bg-white');
+                
+                btn1.classList.replace('text-primary', 'text-gray-500');
+                btn1.classList.replace('border-primary', 'border-transparent');
+                btn1.classList.replace('bg-white', 'bg-gray-50');
+            }
+
+            // 更新整日路線地圖與連結
+            document.getElementById('daily-route-title').textContent = routeData[dayNumber].title;
+            document.getElementById('daily-route-map').src = routeData[dayNumber].embedUrl;
+            document.getElementById('daily-route-link').href = routeData[dayNumber].linkUrl;
+
+            renderTimeline(dayNumber);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderTimeline(1);
+            // 初始化時也要載入 Day 1 的全日地圖
+            document.getElementById('daily-route-title').textContent = routeData[1].title;
+            document.getElementById('daily-route-map').src = routeData[1].embedUrl;
+            document.getElementById('daily-route-link').href = routeData[1].linkUrl;
+        });
+
+    </script>
+</body>
+</html>
