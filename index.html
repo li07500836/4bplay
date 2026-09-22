@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>南投埔里兩天一夜親子遊：精準時刻版</title>
+    <title>南投埔里兩天一夜家族旅行 (完整資訊版)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -24,334 +24,324 @@
         }
     </script>
     <style>
-        body {
-            background-color: #fdfbf7;
-            color: #1f2937;
-        }
-        .fade-in {
-            animation: fadeIn 0.4s ease-in-out;
-        }
+        body { background-color: #fdfbf7; color: #1f2937; }
+        .fade-in { animation: fadeIn 0.4s ease-in-out; }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .timeline-item {
-            cursor: pointer;
-            transition: all 0.2s;
-            position: relative;
-        }
-        .timeline-item:hover {
-            background-color: #fffbeb;
-            border-left-color: #f59e0b;
-        }
-        .timeline-item.active {
-            background-color: #fffbeb;
-            border-left-color: #f59e0b;
-            font-weight: bold;
-        }
-        /* Custom scrollbar for timeline */
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 6px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: #f1f1f1; 
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #cbd5e1; 
-            border-radius: 10px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8; 
-        }
+        .timeline-item { cursor: pointer; transition: all 0.2s; position: relative; }
+        .timeline-item:hover, .timeline-item.active { background-color: #fffbeb; border-left-color: #f59e0b; }
+        .timeline-item.active { font-weight: bold; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        .info-table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; }
+        .info-table th, .info-table td { border: 1px solid #e5e7eb; padding: 0.75rem; text-align: left; }
+        .info-table th { background-color: #f3f4f6; font-weight: 600; color: #4b5563; }
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 0.5rem; }
+        .menu-item { background-color: #f3f4f6; color: #4b5563; padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-size: 0.875rem; text-align: center; }
     </style>
 </head>
 <body class="antialiased">
-
-    <!-- 導覽列 -->
     <nav class="bg-white shadow-sm sticky top-0 z-50">
         <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
             <div class="text-xl font-bold text-primary flex items-center gap-2">
                 <span>🎒</span> 埔里 24 人親子遊導覽
             </div>
             <div class="flex gap-4 text-sm font-medium">
+                <a href="#tables" class="hover:text-primary transition-colors">總覽資訊</a>
                 <a href="#itinerary" class="hover:text-primary transition-colors">互動時刻表</a>
             </div>
         </div>
     </nav>
 
-    <!-- 網頁標頭 -->
     <header class="max-w-6xl mx-auto px-4 py-10 md:py-16 text-center">
         <div class="inline-block bg-amber-100 text-amber-800 px-4 py-1 rounded-full text-sm font-bold mb-4 shadow-sm">
-            👨‍👩‍👧‍👦 Day 1：13大 7小 1嬰 ｜ Day 2：14大 8小 1嬰
+            👨‍👩‍👧‍👦 Day 1: 13大 7小 1Baby | Day 2: 14大 8小 1Baby
         </div>
         <h1 class="text-3xl md:text-5xl font-extrabold mb-6 leading-tight text-darktext">
-            南投埔里兩天一夜親子遊<br>
-            <span class="text-primary">精準時刻與路線指南 ⏱️🗺️</span>
+            南投埔里兩天一夜家族大旅行<br>
+            <span class="text-primary">完整資訊與時刻指南 ⏱️🗺️</span>
         </h1>
-        <p class="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            這是一份為超級大陣仗家族精算過時間的專屬行程表。每個景點間皆已預留 15~30 分鐘的車程與整隊緩衝時間，確保大人不累、小孩玩得開心。點擊下方時刻表，即可查看詳細說明與導航地圖。
-        </p>
     </header>
 
     <main class="max-w-6xl mx-auto px-4 pb-20">
-    
-        <!-- 參與人員名單 -->
-        <section id="participant-list" class="mb-10">
-            <h2 class="text-2xl font-extrabold text-darktext mb-5 flex items-center gap-2"><span>🙋‍♂️</span> 參與人員總覽</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Day 1 人員 -->
-                <div class="bg-white rounded-2xl shadow-sm border border-blue-200 overflow-hidden">
-                    <div class="bg-blue-50 p-4 border-b border-blue-200 flex justify-between items-center">
-                        <h3 class="text-xl font-bold text-blue-900">Day 1 參與人員</h3>
-                        <span class="bg-blue-200 text-blue-800 text-xs px-2 py-1 rounded font-bold">13大 7小 1嬰</span>
+        <!-- 表格資訊總覽區塊 -->
+        <section id="tables" class="mb-12">
+            <!-- 參與人員總覽 -->
+            <div class="mb-10">
+                <h2 class="text-xl md:text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">🙋‍♂️ 參與人員總覽</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <!-- Day 1 Personnel -->
+                    <div class="border border-blue-200 rounded-xl overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow">
+                        <div class="bg-blue-50 px-5 py-4 flex justify-between items-center border-b border-blue-100">
+                            <h3 class="font-bold text-blue-900 text-lg">Day 1 參與人員</h3>
+                            <span class="bg-blue-200 text-blue-800 text-xs px-2.5 py-1 rounded font-bold tracking-wider">13大 7小 1嬰</span>
+                        </div>
+                        <div class="p-5 flex flex-wrap gap-2.5">
+                            <span class="border border-gray-200 bg-gray-50 text-gray-700 px-3.5 py-1.5 rounded-md text-sm shadow-sm font-medium">David 家</span>
+                            <span class="border border-gray-200 bg-gray-50 text-gray-700 px-3.5 py-1.5 rounded-md text-sm shadow-sm font-medium">明軒 家</span>
+                            <span class="border border-gray-200 bg-gray-50 text-gray-700 px-3.5 py-1.5 rounded-md text-sm shadow-sm font-medium">振彥 家</span>
+                            <span class="border border-gray-200 bg-gray-50 text-gray-700 px-3.5 py-1.5 rounded-md text-sm shadow-sm font-medium">冠宇 家</span>
+                            <span class="border border-gray-200 bg-gray-50 text-gray-700 px-3.5 py-1.5 rounded-md text-sm shadow-sm font-medium">暐竣 家</span>
+                            <span class="border border-gray-200 bg-gray-50 text-gray-700 px-3.5 py-1.5 rounded-md text-sm shadow-sm font-medium">球球 家</span>
+                            <span class="border border-gray-200 bg-gray-50 text-gray-700 px-3.5 py-1.5 rounded-md text-sm shadow-sm font-medium">脖子</span>
+                        </div>
                     </div>
-                    <div class="p-4">
-                        <div class="flex flex-wrap gap-2">
-                            <span class="bg-gray-100 text-gray-800 border border-gray-300 px-3 py-1.5 rounded-lg text-sm font-medium">David 家</span>
-                            <span class="bg-gray-100 text-gray-800 border border-gray-300 px-3 py-1.5 rounded-lg text-sm font-medium">明軒 家</span>
-                            <span class="bg-gray-100 text-gray-800 border border-gray-300 px-3 py-1.5 rounded-lg text-sm font-medium">振彥 家</span>
-                            <span class="bg-gray-100 text-gray-800 border border-gray-300 px-3 py-1.5 rounded-lg text-sm font-medium">冠宇 家</span>
-                            <span class="bg-gray-100 text-gray-800 border border-gray-300 px-3 py-1.5 rounded-lg text-sm font-medium">暐竣 家</span>
-                            <span class="bg-gray-100 text-gray-800 border border-gray-300 px-3 py-1.5 rounded-lg text-sm font-medium">球球 家</span>
-                            <span class="bg-gray-100 text-gray-800 border border-gray-300 px-3 py-1.5 rounded-lg text-sm font-medium">脖子</span>
+                    <!-- Day 2 Personnel -->
+                    <div class="border border-purple-200 rounded-xl overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow">
+                        <div class="bg-purple-50 px-5 py-4 flex justify-between items-center border-b border-purple-100">
+                            <h3 class="font-bold text-purple-900 text-lg">Day 2 參與人員</h3>
+                            <span class="bg-purple-200 text-purple-800 text-xs px-2.5 py-1 rounded font-bold tracking-wider">14大 8小 1嬰</span>
+                        </div>
+                        <div class="p-5 flex flex-wrap gap-2.5">
+                            <span class="border border-gray-200 bg-gray-50 text-gray-700 px-3.5 py-1.5 rounded-md text-sm shadow-sm font-medium">David 家</span>
+                            <span class="border border-gray-200 bg-gray-50 text-gray-700 px-3.5 py-1.5 rounded-md text-sm shadow-sm font-medium">明軒 家</span>
+                            <span class="border border-gray-200 bg-gray-50 text-gray-700 px-3.5 py-1.5 rounded-md text-sm shadow-sm font-medium">振彥 家</span>
+                            <span class="border border-gray-200 bg-gray-50 text-gray-700 px-3.5 py-1.5 rounded-md text-sm shadow-sm font-medium">冠宇 家</span>
+                            <span class="border border-gray-200 bg-gray-50 text-gray-700 px-3.5 py-1.5 rounded-md text-sm shadow-sm font-medium">暐竣 家</span>
+                            <span class="border border-gray-200 bg-gray-50 text-gray-700 px-3.5 py-1.5 rounded-md text-sm shadow-sm font-medium">球球 家</span>
+                            <span class="border border-purple-200 bg-purple-100 text-purple-800 px-3.5 py-1.5 rounded-md text-sm font-bold shadow-sm">偉倫 家 (今日加入)</span>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Day 2 人員 -->
-                <div class="bg-white rounded-2xl shadow-sm border border-purple-200 overflow-hidden">
-                    <div class="bg-purple-50 p-4 border-b border-purple-200 flex justify-between items-center">
-                        <h3 class="text-xl font-bold text-purple-900">Day 2 參與人員</h3>
-                        <span class="bg-purple-200 text-purple-800 text-xs px-2 py-1 rounded font-bold">14大 8小 1嬰</span>
+            <!-- 餐廳桌次分配表 -->
+            <div class="mb-10">
+                <h2 class="text-xl md:text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">🍽️ 餐廳桌次分配表</h2>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+                    <!-- Day 1 Lunch -->
+                    <div class="border border-amber-200 rounded-xl overflow-hidden bg-white shadow-sm flex flex-col hover:shadow-md transition-shadow">
+                        <div class="bg-amber-50 px-5 py-4 border-b border-amber-100">
+                            <h3 class="font-bold text-amber-900 text-lg">Day 1：金都餐廳 (午餐)</h3>
+                            <p class="text-sm text-amber-700 mt-1 font-medium">總人數：13大 7小 1baby | 桌價：$4,500 / 桌 (共2桌)</p>
+                        </div>
+                        <div class="p-5 flex-1">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 h-full">
+                                <div class="bg-gray-50 border border-gray-100 rounded-lg p-4 shadow-inner">
+                                    <h4 class="font-bold text-amber-600 mb-2 border-b border-gray-200 pb-2">第一桌 (6大 4小)</h4>
+                                    <ul class="text-sm text-gray-700 space-y-2 list-disc list-inside mt-3 font-medium">
+                                        <li>David (2大1小)</li>
+                                        <li>明軒 (2大1小)</li>
+                                        <li>振彥 (2大2小)</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-gray-50 border border-gray-100 rounded-lg p-4 shadow-inner">
+                                    <h4 class="font-bold text-amber-600 mb-2 border-b border-gray-200 pb-2">第二桌 (7大 4小)</h4>
+                                    <ul class="text-sm text-gray-700 space-y-2 list-disc list-inside mt-3 font-medium">
+                                        <li>冠宇 (2大2小)</li>
+                                        <li>暐竣 (2大1小)</li>
+                                        <li>球球 (2大1小)</li>
+                                        <li>脖子 (1大)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="px-5 pb-5">
+                            <div class="pt-4 border-t border-gray-100">
+                                <p class="text-xs font-bold text-gray-400 mb-2 tracking-wide">紹興宴菜單：</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">紹興田園組曲</span>
+                                    <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">原鄉豬油丁香米飯</span>
+                                    <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">老薑麻油三仙鴨</span>
+                                    <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">醬香乾蒸雞</span>
+                                    <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">清蒸海上鮮魚</span>
+                                    <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">女兒紅醉冷蝦</span>
+                                    <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">茭白美人丸百菇鍋</span>
+                                    <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">宮保翠玉杏鮑菇</span>
+                                    <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">脆炒寶島得時蔬</span>
+                                    <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">寶島四季水果盤</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="p-4">
-                        <div class="flex flex-wrap gap-2">
-                            <span class="bg-gray-100 text-gray-800 border border-gray-300 px-3 py-1.5 rounded-lg text-sm font-medium">David 家</span>
-                            <span class="bg-gray-100 text-gray-800 border border-gray-300 px-3 py-1.5 rounded-lg text-sm font-medium">明軒 家</span>
-                            <span class="bg-gray-100 text-gray-800 border border-gray-300 px-3 py-1.5 rounded-lg text-sm font-medium">振彥 家</span>
-                            <span class="bg-gray-100 text-gray-800 border border-gray-300 px-3 py-1.5 rounded-lg text-sm font-medium">冠宇 家</span>
-                            <span class="bg-gray-100 text-gray-800 border border-gray-300 px-3 py-1.5 rounded-lg text-sm font-medium">暐竣 家</span>
-                            <span class="bg-gray-100 text-gray-800 border border-gray-300 px-3 py-1.5 rounded-lg text-sm font-medium">球球 家</span>
-                            <span class="bg-purple-100 text-purple-800 border border-purple-300 px-3 py-1.5 rounded-lg text-sm font-bold shadow-sm">偉倫 家 (今日加入)</span>
+                    
+                    <!-- Day 2 Lunch -->
+                    <div class="border border-emerald-200 rounded-xl overflow-hidden bg-white shadow-sm flex flex-col hover:shadow-md transition-shadow">
+                        <div class="bg-emerald-50 px-5 py-4 border-b border-emerald-100">
+                            <h3 class="font-bold text-emerald-900 text-lg">Day 2：埔里四季蒸宴 (午餐)</h3>
+                            <p class="text-sm text-emerald-700 mt-1 font-medium">總人數：14大 8小 1baby | 桌價：$4,950 / 桌 (4500+450服務費)</p>
+                        </div>
+                        <div class="p-5 flex-1">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 h-full">
+                                <div class="bg-gray-50 border border-gray-100 rounded-lg p-4 shadow-inner">
+                                    <h4 class="font-bold text-emerald-600 mb-2 border-b border-gray-200 pb-2">第一桌 (8大 4小)</h4>
+                                    <ul class="text-sm text-gray-700 space-y-2 list-disc list-inside mt-3 font-medium">
+                                        <li>David (2大1小)</li>
+                                        <li>暐竣 (2大1小)</li>
+                                        <li>球球 (2大1小)</li>
+                                        <li>明軒 (2大1小)</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-gray-50 border border-gray-100 rounded-lg p-4 shadow-inner">
+                                    <h4 class="font-bold text-emerald-600 mb-2 border-b border-gray-200 pb-2">第二桌 (6大 5小)</h4>
+                                    <ul class="text-sm text-gray-700 space-y-2 list-disc list-inside mt-3 font-medium">
+                                        <li>偉倫 (2大1小)</li>
+                                        <li>冠宇 (2大2小)</li>
+                                        <li>振彥 (2大2小)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="px-5 pb-5">
+                            <div class="pt-4 border-t border-gray-100">
+                                <p class="text-xs font-bold text-gray-400 mb-2 tracking-wide">四季蒸宴菜單：</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">清蒸美人腿</span>
+                                    <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">海味九孔鮑</span>
+                                    <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">清蒸海上鮮</span>
+                                    <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">干貝時令瓜</span>
+                                    <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">干貝絲蒸飯</span>
+                                    <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">粵式粉蒸肉</span>
+                                    <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">海口三鮮盤</span>
+                                    <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">蒜蓉粉絲蝦</span>
+                                    <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">四季鮮雞湯</span>
+                                    <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">爆漿流沙包</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 住宿資訊與房型分配 -->
+            <div class="mb-10">
+                <h2 class="text-xl md:text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">🏡 住宿資訊與房型分配</h2>
+                <div class="border border-emerald-200 rounded-2xl overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow">
+                    <div class="bg-emerald-50/60 px-6 py-5 border-b border-emerald-100">
+                        <h3 class="font-bold text-teal-800 text-xl tracking-wide">悠森境渡假村 (11/28 – 11/29)</h3>
+                        <p class="text-sm text-teal-700 mt-2 font-medium">住宿人數：12大 8小 (小朋友皆未滿六歲)</p>
+                    </div>
+                    <div class="p-5 md:p-6">
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+                            <!-- 雙人房 -->
+                            <div class="bg-gray-50 border border-gray-200 rounded-xl p-5 shadow-sm flex flex-col hover:border-teal-200 transition-colors">
+                                <div class="flex justify-between items-end border-b border-gray-200 pb-3 mb-4">
+                                    <h4 class="font-bold text-teal-700 text-lg">雙人房 (一大床)</h4>
+                                    <span class="text-sm text-gray-500 font-medium tracking-wide">共 4 間</span>
+                                </div>
+                                <p class="text-gray-600 text-sm mb-5 font-medium">價格：$4,500 / 間 (含早)</p>
+                                <div class="flex flex-wrap gap-2.5 mt-auto">
+                                    <span class="border border-teal-300 text-teal-800 bg-white px-3 py-1.5 rounded-lg text-sm font-bold shadow-sm">暐竣 家</span>
+                                    <span class="border border-teal-300 text-teal-800 bg-white px-3 py-1.5 rounded-lg text-sm font-bold shadow-sm">明軒 家</span>
+                                    <span class="border border-teal-300 text-teal-800 bg-white px-3 py-1.5 rounded-lg text-sm font-bold shadow-sm">嘉明 家</span>
+                                    <span class="border border-teal-300 text-teal-800 bg-white px-3 py-1.5 rounded-lg text-sm font-bold shadow-sm">峻瑋 家</span>
+                                </div>
+                            </div>
+
+                            <!-- 四人房 -->
+                            <div class="bg-gray-50 border border-gray-200 rounded-xl p-5 shadow-sm flex flex-col hover:border-orange-200 transition-colors">
+                                <div class="flex justify-between items-end border-b border-gray-200 pb-3 mb-4">
+                                    <h4 class="font-bold text-orange-600 text-lg">免費升等四人房</h4>
+                                    <span class="text-sm text-gray-500 font-medium tracking-wide">兩大床 / 共 2 間</span>
+                                </div>
+                                <p class="text-gray-600 text-sm mb-5 font-medium">價格：$4,500 / 間 (含早)</p>
+                                <div class="flex flex-wrap gap-2.5 mt-auto">
+                                    <span class="border border-orange-300 text-orange-800 bg-white px-3 py-1.5 rounded-lg text-sm font-bold shadow-sm">振彥 家</span>
+                                    <span class="border border-orange-300 text-orange-800 bg-white px-3 py-1.5 rounded-lg text-sm font-bold shadow-sm">冠宇 家</span>
+                                </div>
+                            </div>
+
+                            <!-- 須知 -->
+                            <div class="bg-red-50/50 border border-red-200 rounded-xl p-5 shadow-sm flex flex-col">
+                                <h4 class="font-bold text-red-600 text-lg border-b border-red-200 pb-3 mb-4 tracking-wide">!! 入住重要須知</h4>
+                                <ul class="text-sm text-red-900 space-y-3 font-medium list-disc list-outside ml-4">
+                                    <li class="leading-relaxed pl-1"><span class="font-bold">無電梯</span>，被安排的房間皆在同一棟 (2F)，行李打包請斟酌。</li>
+                                    <li class="leading-relaxed pl-1">入住享有<span class="font-bold">九族文化村門票購買優惠</span>。</li>
+                                    <li class="leading-relaxed pl-1">提供嬰兒床、床圍、澡盆，但<span class="font-bold underline decoration-red-400 underline-offset-2">無提供消毒鍋</span>，請家長特別留意。</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 餐廳桌次分配區塊 -->
-        <section id="seating-chart" class="mb-10">
-            <h2 class="text-2xl font-extrabold text-darktext mb-5 flex items-center gap-2"><span>🍽️</span> 餐廳桌次分配表</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Day 1 -->
-                <div class="bg-white rounded-2xl shadow-sm border border-amber-200 overflow-hidden">
-                    <div class="bg-amber-50 p-4 border-b border-amber-200">
-                        <h3 class="text-xl font-bold text-amber-900 mb-1">Day 1：金都餐廳 (午餐)</h3>
-                        <p class="text-sm text-amber-700 font-medium">總人數：13大 7小 1baby ｜ 桌價：$4,500 / 桌 (共2桌)</p>
-                    </div>
-                    <div class="p-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div class="bg-gray-50 rounded-lg p-3 border border-gray-200">
-                            <div class="font-bold text-primary mb-2 border-b border-gray-200 pb-1">第一桌 (6大 4小)</div>
-                            <ul class="text-sm text-gray-700 space-y-1">
-                                <li>• David (2大1小)</li>
-                                <li>• 明軒 (2大1小)</li>
-                                <li>• 振彥 (2大2小)</li>
-                            </ul>
-                        </div>
-                        <div class="bg-gray-50 rounded-lg p-3 border border-gray-200">
-                            <div class="font-bold text-primary mb-2 border-b border-gray-200 pb-1">第二桌 (7大 4小)</div>
-                            <ul class="text-sm text-gray-700 space-y-1">
-                                <li>• 冠宇 (2大2小)</li>
-                                <li>• 暐竣 (2大1小)</li>
-                                <li>• 球球 (2大1小)</li>
-                                <li>• 脖子 (1大)</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Day 2 -->
-                <div class="bg-white rounded-2xl shadow-sm border border-emerald-200 overflow-hidden">
-                    <div class="bg-emerald-50 p-4 border-b border-emerald-200">
-                        <h3 class="text-xl font-bold text-emerald-900 mb-1">Day 2：埔里四季蒸宴 (午餐)</h3>
-                        <p class="text-sm text-emerald-700 font-medium">總人數：14大 8小 1baby ｜ 桌價：$4,950 / 桌 (4500+450服務費)</p>
-                    </div>
-                    <div class="p-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div class="bg-gray-50 rounded-lg p-3 border border-gray-200">
-                            <div class="font-bold text-secondary mb-2 border-b border-gray-200 pb-1">第一桌 (8大 4小)</div>
-                            <ul class="text-sm text-gray-700 space-y-1">
-                                <li>• David (2大1小)</li>
-                                <li>• 暐竣 (2大1小)</li>
-                                <li>• 球球 (2大1小)</li>
-                                <li>• 明軒 (2大1小)</li>
-                            </ul>
-                        </div>
-                        <div class="bg-gray-50 rounded-lg p-3 border border-gray-200">
-                            <div class="font-bold text-secondary mb-2 border-b border-gray-200 pb-1">第二桌 (6大 5小)</div>
-                            <ul class="text-sm text-gray-700 space-y-1">
-                                <li>• 偉倫 (2大1小)</li>
-                                <li>• 冠宇 (2大2小)</li>
-                                <li>• 振彥 (2大2小)</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 住宿資訊與房型分配 -->
-        <section id="accommodation-info" class="mb-10">
-            <h2 class="text-2xl font-extrabold text-darktext mb-5 flex items-center gap-2"><span>🏡</span> 住宿資訊與房型分配</h2>
-            <div class="bg-white rounded-2xl shadow-sm border border-teal-200 overflow-hidden">
-                <div class="bg-teal-50 p-4 border-b border-teal-200 flex flex-col md:flex-row md:justify-between md:items-center gap-2">
-                    <div>
-                        <h3 class="text-xl font-bold text-teal-900 flex items-center gap-2">悠森境渡假村 (11/28 - 11/29)</h3>
-                        <p class="text-sm text-teal-700 font-medium mt-1">住宿人數：12大 8小 (小朋友皆未滿六歲)</p>
-                    </div>
-                </div>
-                
-                <div class="p-5 grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    <!-- 房型 1 -->
-                    <div class="lg:col-span-1 bg-gray-50 rounded-xl p-4 border border-gray-200 shadow-sm">
-                        <div class="font-bold text-teal-700 mb-3 border-b border-gray-200 pb-2 flex justify-between items-end">
-                            <span class="text-lg">雙人房 (一大床)</span>
-                            <span class="text-sm font-normal text-gray-500">共 4 間</span>
-                        </div>
-                        <div class="text-sm text-gray-600 mb-3">價格：$4,500 / 間 (含早)</div>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="bg-white border border-teal-200 text-teal-800 px-3 py-1.5 rounded-lg text-sm font-bold shadow-sm">暐竣 家</span>
-                            <span class="bg-white border border-teal-200 text-teal-800 px-3 py-1.5 rounded-lg text-sm font-bold shadow-sm">明軒 家</span>
-                            <span class="bg-white border border-teal-200 text-teal-800 px-3 py-1.5 rounded-lg text-sm font-bold shadow-sm">嘉明 家</span>
-                            <span class="bg-white border border-teal-200 text-teal-800 px-3 py-1.5 rounded-lg text-sm font-bold shadow-sm">峻瑋 家</span>
-                        </div>
-                    </div>
-
-                    <!-- 房型 2 -->
-                    <div class="lg:col-span-1 bg-gray-50 rounded-xl p-4 border border-gray-200 shadow-sm">
-                        <div class="font-bold text-orange-600 mb-3 border-b border-gray-200 pb-2 flex justify-between items-end">
-                            <span class="text-lg">免費升等四人房</span>
-                            <span class="text-sm font-normal text-gray-500">兩大床 / 共 2 間</span>
-                        </div>
-                        <div class="text-sm text-gray-600 mb-3">價格：$4,500 / 間 (含早)</div>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="bg-white border border-orange-200 text-orange-800 px-3 py-1.5 rounded-lg text-sm font-bold shadow-sm">振彥 家</span>
-                            <span class="bg-white border border-orange-200 text-orange-800 px-3 py-1.5 rounded-lg text-sm font-bold shadow-sm">冠宇 家</span>
-                        </div>
-                    </div>
-
-                    <!-- 注意事項 -->
-                    <div class="lg:col-span-1 bg-red-50 rounded-xl p-4 border border-red-200 shadow-sm">
-                        <div class="font-bold text-red-700 mb-3 border-b border-red-200 pb-2 flex items-center gap-2">
-                            <span>‼️</span> 入住重要須知
-                        </div>
-                        <ul class="text-sm text-red-800 space-y-2">
-                            <li class="flex items-start gap-2"><span class="mt-0.5">•</span><span><strong>無電梯</strong>，被安排的房間皆在同一棟 (2F)，行李打包請斟酌。</span></li>
-                            <li class="flex items-start gap-2"><span class="mt-0.5">•</span><span>入住享有<strong>九族文化村</strong>門票購買優惠。</span></li>
-                            <li class="flex items-start gap-2"><span class="mt-0.5">•</span><span>提供嬰兒床、床圍、澡盆，但<strong>無提供消毒鍋</strong>，請家長特別留意。</span></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 互動時刻表區塊 -->
+        <!-- 行程表區塊 -->
         <section id="itinerary" class="mb-12">
-            <div class="bg-cardbg rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
-                
-                <!-- Day Switcher -->
+            <h2 class="text-2xl font-bold text-darktext mb-6 border-b-2 border-gray-200 pb-2">⏰ 互動時刻表與導航</h2>
+            <div class="bg-cardbg rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
                 <div class="flex border-b border-gray-200 bg-gray-50">
                     <button id="btn-day1" class="flex-1 py-4 text-center font-bold text-lg bg-white border-b-2 border-primary text-primary hover:bg-gray-50 transition-colors" onclick="switchDay(1)">
-                        🗓️ Day 1：第一天放電行程
+                        🗓️ Day 1 (11/28)
                     </button>
                     <button id="btn-day2" class="flex-1 py-4 text-center font-bold text-lg text-gray-500 border-b-2 border-transparent hover:bg-gray-50 transition-colors" onclick="switchDay(2)">
-                        🗓️ Day 2：第二天萌寵與文化行程
+                        🗓️ Day 2 (11/29)
                     </button>
                 </div>
 
-                <!-- Split View Panel -->
                 <div class="grid grid-cols-1 md:grid-cols-3 min-h-[500px]">
-                    
-                    <!-- Left: Timeline -->
                     <div class="col-span-1 border-r border-gray-200 bg-gray-50/50 p-4 overflow-y-auto custom-scrollbar h-[500px] md:h-[600px]" id="timeline-list">
-                        <!-- JS injects items here -->
                     </div>
 
-                    <!-- Right: Details -->
                     <div class="col-span-1 md:col-span-2 p-6 md:p-10 bg-white flex flex-col justify-start items-start fade-in h-auto md:h-[600px] overflow-y-auto custom-scrollbar" id="detail-panel">
                         <div class="flex items-start md:items-center gap-4 mb-6">
                             <div class="text-5xl shrink-0 mt-1 md:mt-0" id="detail-icon">👈</div>
                             <div>
                                 <h3 class="text-2xl md:text-3xl font-bold text-darktext" id="detail-title">請選擇左側行程</h3>
                                 <div class="inline-block bg-gray-200 text-gray-700 px-3 py-1 rounded text-sm font-medium mt-2 shadow-inner" id="detail-time">--:--</div>
-                                <div class="inline-block bg-emerald-100 text-emerald-800 px-3 py-1 rounded text-sm font-medium mt-2 shadow-inner ml-2 hidden" id="detail-transit">🚗 車程約 15 分</div>
                             </div>
                         </div>
-
                         <div class="w-full mb-6">
                             <h4 class="text-lg font-bold text-primary mb-3 flex items-center gap-2 border-b border-gray-100 pb-2"><span>📝</span> 行程說明</h4>
-                            <p class="text-gray-700 leading-relaxed text-lg" id="detail-desc">點擊左側時刻表中的項目，這裡會顯示詳細的活動內容與規劃建議。</p>
+                            <p class="text-gray-700 leading-relaxed text-lg" id="detail-desc"></p>
                         </div>
-                        
-                        <div class="bg-amber-50 border-l-4 border-amber-400 p-4 rounded-r-lg w-full mb-6 shrink-0" id="detail-tips-container" style="display: none;">
-                            <h4 class="text-md font-bold text-amber-800 mb-1 flex items-center gap-2"><span>💡</span> 溫馨小提醒 / 推薦</h4>
-                            <p class="text-amber-900 leading-relaxed" id="detail-tips"></p>
-                        </div>
-
-                        <!-- 動態 Google Map -->
                         <div class="w-full rounded-xl overflow-hidden border border-gray-200 hidden shrink-0 mb-4 shadow-sm" id="detail-map-container">
-                            <h4 class="text-md font-bold text-secondary bg-gray-50 p-3 border-b border-gray-200 flex items-center gap-2"><span>📍</span> 單一景點地圖 (可縮放)</h4>
+                            <h4 class="text-md font-bold text-secondary bg-gray-50 p-3 border-b border-gray-200 flex items-center gap-2"><span>📍</span> 地點資訊</h4>
                             <iframe id="detail-map" width="100%" height="300" frameborder="0" style="border:0" allowfullscreen loading="lazy"></iframe>
                         </div>
                     </div>
                 </div>
 
-                <!-- 整日路線地圖區塊 -->
                 <div class="p-6 md:p-8 border-t border-gray-200 bg-gray-100">
                     <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-4">
-                        <h4 class="text-xl font-bold text-darktext flex items-center gap-2" id="daily-route-title">🗺️ Day 1 完整行程路線圖</h4>
+                        <h4 class="text-xl font-bold text-darktext flex items-center gap-2" id="daily-route-title">🗺️ 完整行程路線圖</h4>
                         <a id="daily-route-link" href="#" target="_blank" class="inline-flex items-center gap-2 bg-primary text-white px-5 py-2.5 rounded-lg font-bold hover:bg-amber-600 transition-colors shadow-md text-sm md:text-base w-full md:w-auto justify-center">
-                            <span>📱 手機 Google Maps 開啟完整導航</span> ↗️
+                            <span>📱 開啟 Google Maps 導航</span> ↗️
                         </a>
                     </div>
-                    <!-- 加上溫馨提示，解釋 iframe 無法畫路線的原因 -->
-                    <p class="text-sm text-gray-500 mb-3">💡 由於地圖嵌入限制，下方預覽僅顯示埔里鎮中心範圍。**強烈建議點擊上方按鈕**，即可在手機中開啟為您排好的「多點路線自動導航」。</p>
                     <div class="w-full h-72 md:h-[450px] rounded-xl overflow-hidden border border-gray-300 shadow-sm bg-white">
                         <iframe id="daily-route-map" width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen loading="lazy"></iframe>
                     </div>
                 </div>
-
-            </div>
-            
-            <div class="mt-6 text-sm text-gray-500 text-center bg-white border border-gray-200 py-3 rounded-lg flex justify-center items-center px-4 shadow-sm">
-                ⚠️ 時間安排已預留 24 人超大團體上下車與上洗手間之緩衝時間（約 15~30 分鐘）。實際情況請依當日車流調整。
             </div>
         </section>
-
     </main>
-
-    <footer class="bg-darktext text-white py-8 text-center">
-        <p class="mb-2">🎒 南投埔里 24 人大團體精算版時刻表</p>
-        <p class="text-sm text-gray-400">祝全家出遊平安、快樂放電！</p>
-    </footer>
 
     <script>
         const itineraryData = {
             day1: [
-                { id: 'd1-1', time: "11:30 - 14:00", transit: "沙鹿出發，車程約 50 分", title: "沙鹿出發 ➡️ 金都餐廳 (午餐)", desc: "建議上午 11:30 左右從台中沙鹿交流道集合出發，經國道六號直達埔里。12:30 抵達後，24 人的大團體直接前往『金都餐廳』享用在地特色國宴合菜。預留 1.5 小時讓大家能不慌不忙地吃飽、去洗手間整隊，圓桌設計非常適合大家族聊天，為下午的放電行程儲備體力。", tips: "請務必提前預訂能容納 24 人的包廂或相鄰大桌。", icon: "🍜", mapQuery: "金都餐廳 埔里" },
-                { id: 'd1-2', time: "14:15 - 16:45", transit: "園後車程約 15 分", title: "福興溫泉區親子公園", desc: "吃飽後前往親子公園，下午安排 2.5 小時讓小朋友在超大沙坑、滑索與攀爬網盡情放電。長輩和大人則可在旁邊的溫泉池泡腳聊天、輕鬆看顧小孩。", tips: "建議準備玩沙工具與換洗衣物。", icon: "🛝", mapQuery: "福興溫泉區親子公園 南投" },
-                { id: 'd1-3', time: "17:00 - 18:00", transit: "飯店內移動", title: "悠森境渡假村 (Check-in ＆ 大草皮放電)", desc: "傍晚時分，驅車前往今晚下榻的『悠森境渡假村』辦理入住。趁著天還沒黑，可以帶 9 位小朋友在渡假村的千坪大草皮上奔跑、吹泡泡，享受自然的悠閒時光。", tips: "可以準備一些戶外玩具如飛盤、泡泡機。", icon: "🏨", mapQuery: "悠森境渡假村 南投" },
-                { id: 'd1-4', time: "18:00 - 19:30", transit: "派車採買約 30 分", title: "外帶晚餐回飯店享用", desc: "為了讓大團體吃得更自在，晚餐改由幾位大人派車前往埔里市區外帶美食，其他人則留在飯店內梳洗或繼續放電。將在地熱炒、小吃或大披薩買回飯店的交誼空間一起享用，小朋友就算吵鬧也不怕影響到餐廳其他客人，大人也能輕鬆小酌。", tips: "外帶建議提前電話預訂餐點避免久候。", icon: "🥡", mapQuery: "埔里市區 南投" },
-                { id: 'd1-5', time: "19:45 - 21:30", transit: "結束後回飯店", title: "埔里城觀光夜市 (續攤與遊戲)", desc: "此時大家都已吃過正餐，逛夜市的目標是讓小朋友體驗打彈珠、套圈圈、釣水球等夜市童玩。大人們可以順便買些飲料或鹽酥雞當宵夜，大約玩到九點半回飯店，小朋友保證上床秒睡。", tips: "營業時間：每週五、六、日", icon: "🍢", mapQuery: "埔里城觀光夜市 南投" }
+                { id: 'd1-0', time: "11:30 - 12:30", title: "集合出發前往埔里", desc: "早上從溫暖的家出發，車程中可以讓小朋友睡個回籠覺。各家由台中沙鹿交流道集合出發，準備展開豐富的兩天一夜南投之旅！", icon: "🚗", mapQuery: "" },
+                { id: 'd1-1', time: "12:30 - 14:00", title: "金都餐廳 (午餐)", desc: "抵達埔里後，首先直奔知名「金都餐廳」享用在地特色紹興宴！已預訂2桌豐富合菜，讓大家族能好好坐下來飽餐一頓，不用花時間找車位跟候位，為下午的放電行程儲備充足體力。", icon: "🍽️", mapQuery: "金都餐廳 埔里" },
+                { id: 'd1-2', time: "14:15 - 16:45", title: "福興溫泉區親子公園", desc: "經過車程，小朋友現在絕對是電力滿滿！來到這個廣受好評的共融式遊戲場，立刻放生孩子們去挑戰大型攀爬網和超高溜滑梯。對於小朋友來說，旁邊那片超大沙坑絕對是快樂天堂。最貼心的是，公園旁設有免費溫泉泡腳池，長輩和大人們可以一邊泡著暖呼呼的溫泉放鬆雙腿，一邊輕鬆看顧小孩，大人小孩都滿足！", icon: "🛝", mapQuery: "福興溫泉區親子公園 南投" },
+                { id: 'd1-3', time: "17:00 - 18:00", title: "悠森境渡假村 (Check-in & 大草皮放電)", desc: "傍晚時分，驅車前往今晚下榻的『悠森境渡假村』辦理入住手續。放完行李後，如果孩子們的電力還沒放完，園區內有千坪大草皮與落羽松林，非常適合讓小朋友帶著泡泡機或球具在草地上繼續奔跑跑跳，享受微涼的傍晚時光。", icon: "🏨", mapQuery: "悠森境渡假村 南投" },
+                { id: 'd1-4', time: "18:00 - 19:30", title: "外帶晚餐回飯店享用", desc: "考量到大陣仗移動與小朋友放電後的體力，晚餐安排由幾位大人派代表外出，外帶周邊美味的晚餐（如披薩、熱炒小吃）回到渡假村。大家可以在寬敞舒適的空間裡輕鬆吃飯、聊天休息，不用擔心打擾到其他客人。", icon: "🥡", mapQuery: "悠森境渡假村 南投" },
+                { id: 'd1-5', time: "19:45 - 21:30", title: "埔里城觀光夜市 (續攤與遊戲)", desc: "稍微梳洗休息後，晚上大陣仗出發前往『埔里城觀光夜市』續攤！逛夜市是大家族出遊最棒的選擇，大家可以自由解散，買喜歡的宵夜。吃飽後，帶小朋友去玩幾局打彈珠、套圈圈或是釣水球。感受在地熱鬧的氣氛後，回到飯店保證小朋友秒睡！", icon: "🍢", mapQuery: "埔里城觀光夜市 南投" }
             ],
             day2: [
-                { id: 'd2-1', time: "08:00 - 09:30", transit: "飯店內移動", title: "飯店自助早餐", desc: "在悠森境享用豐盛的自助早餐。大家可以優閒地吃到飽，為第二天的行程儲備體力。", tips: "建議早點起床享受沒有人擠人的用餐時光。", icon: "🍳", img: "https://images.unsplash.com/photo-1533089859705-26940bfb1740?auto=format&fit=crop&w=800&q=80", mapQuery: "悠森境渡假村 南投" },
-                { id: 'd2-2', time: "09:30 - 11:15", transit: "退房與車程約 15 分", title: "千坪大草皮放電 ＆ 退房", desc: "吃飽後，把握退房前的時間讓小朋友在悠森境的大草皮與落羽松林間再次盡情放電。大人們可以輪流陪玩，或回房優雅地整理行李。11:00 準時辦理退房手續並集合上車。", tips: "草皮區玩耍可以幫小朋友補擦防蚊液。", icon: "🌳", img: "https://images.unsplash.com/photo-1596464716127-f2a82984de30?auto=format&fit=crop&w=800&q=80", mapQuery: "悠森境渡假村 南投" },
-                { id: 'd2-3', time: "11:30 - 12:30", transit: "園後車程約 15 分", title: "水与松萌萌園", desc: "11:30 準時抵達能讓大人小孩都發出少女尖叫的『水与松萌萌園』！安排 1 小時讓小朋友拿著牧草餵食呆萌的水豚君、草泥馬，並在美麗的落羽松林下拍攝超大合照。", tips: "假日人潮可能較多，防蚊液可以隨身帶著幫小朋友補噴。", icon: "🦙", img: "https://images.unsplash.com/photo-1589136777351-fdc9c9cb1504?auto=format&fit=crop&w=800&q=80", mapQuery: "水与松萌萌園 南投" },
-                { id: 'd2-4', time: "12:45 - 14:00", transit: "餐後車程約 15 分", title: "埔里四季蒸宴 (豐盛午餐)", desc: "超級大團體非常適合來到『埔里四季蒸宴』享用超澎湃的特色蒸籠宴！食材新鮮、份量足夠。店家營業至 14:00，我們 12:45 抵達剛剛好，大圓桌設計讓大家族聚餐更有氣氛。", tips: "營業時間至 14:00，請務必提前預訂兩大桌或包廂。", icon: "🍽️", img: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80", mapQuery: "埔里四季蒸宴 南投" },
-                { id: 'd2-5', time: "14:15 - 15:30", transit: "園後車程約 15 分", title: "機器人創藝園區", desc: "下午安排參觀充滿科幻感的環保鋼鐵機器人。各種由廢棄汽車零件、五金金屬重新焊接打造的巨大變形金剛，會讓小朋友看得目瞪口呆，非常有視覺震撼力。", tips: "營業時間：通常為每週六、日", icon: "🤖", img: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800&q=80", mapQuery: "機器人創藝園區 埔里" },
-                { id: 'd2-6', time: "15:45 - 16:45", transit: "準備上車北返", title: "埔里酒廠", desc: "旅程最終站。在酒廠安排約 1 小時，長輩可以進展售中心採買埔里名產當伴手禮，全家一起吃現烤的紹興香腸和無酒精的酒香冰棒當下午茶，上個洗手間整隊完畢後準備北返。", tips: "必吃推薦：紹興香腸、酒香冰棒。", icon: "🌭", img: "https://images.unsplash.com/photo-1627308594247-41804f3bf320?auto=format&fit=crop&w=800&q=80", mapQuery: "埔里酒廠 南投" },
-                { id: 'd2-7', time: "17:00", transit: "", title: "帶著滿滿回憶，回家！", desc: "吃完冰棒、整隊完畢，這趟精打細算的埔里之旅正式畫下句點。避開了最晚的塞車潮，上了車後，徹底放完電的小朋友大概不用十分鐘就會進入夢鄉，大人們也能帶著滿滿的照片與回憶，平平安安地踏上歸途。", tips: "行車注意安全，期待下次家族大旅行！", icon: "🚗", img: "https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=800&q=80", mapQuery: "" }
+                { id: 'd2-1', time: "08:00 - 11:00", title: "悠森境渡假村 (早餐 & 草皮活動)", desc: "早安！經過一夜好眠，全家一起享用飯店的自助早餐。大家可以悠閒地吃到飽，退房前還能讓小朋友在飯店大草皮跑跳、吹泡泡做最後的放電！", icon: "🍳", mapQuery: "悠森境渡假村 南投" },
+                { id: 'd2-2', time: "11:30 - 12:15", title: "水与松萌萌園", desc: "退房後的第一站，來到能讓大人小孩都發出少女尖叫的『水与松萌萌園』！在這裡，你們可以拿著牧草近距離餵食呆萌的水豚君，或是跟溫馴的羊駝互動拍照。園區環境乾淨，非常適合在這裡拍下家族大合照，留下珍貴的回憶。", icon: "🦙", mapQuery: "水与松萌萌園 南投" },
+                { id: 'd2-3', time: "12:45 - 14:00", title: "埔里四季蒸宴 (午餐)", desc: "中午時分，偉倫一家順利會合！大家入座享用超澎湃的「大蒸籠料理」。這段時間也是讓玩了一整個上午的小朋友稍微在餐廳裡靜下來休息、充電的好時機，為下午的創意行程做準備。", icon: "🍽️", mapQuery: "埔里四季蒸宴 南投" },
+                { id: 'd2-4', time: "14:15 - 15:45", title: "機器人創藝園區", desc: "下午的行程轉換風格，帶大家來到超級酷炫的『機器人創藝園區』！這裡滿滿都是利用廢棄汽車零件重新焊接打造的巨大機器人。對於喜歡車子或變形金剛的小朋友來說，這裡簡直是夢幻基地，是個極具視覺震撼又富含教育意義的特色景點。", icon: "🤖", mapQuery: "機器人創藝園區 埔里" },
+                { id: 'd2-5', time: "16:00 - 17:00", title: "埔里酒廠", desc: "旅程的尾聲，來到最經典的『埔里酒廠』！大家可以在廣大的園區內悠閒散步，長輩可以進去展售中心採買伴手禮。最重要的是，一定要買幾根剛出爐的紹興香腸，再配上一支小朋友也能吃的酒香（無酒精）冰棒，享受全家聚在一起的甜蜜下午茶時光。", icon: "🌭", mapQuery: "埔里酒廠 南投" },
+                { id: 'd2-6', time: "17:00", title: "帶著滿滿回憶，回家！", desc: "吃完冰棒、上完洗手間，這趟豐富的兩天一夜南投埔里之旅正式畫下句點！這兩天裡，小朋友盡情跑跳放電，大人們也享受了悠閒和在地美食。上了車後，小朋友大概不用十分鐘就會進入夢鄉，大人們也能帶著滿滿的照片與回憶，平平安安地踏上歸途。", icon: "🚗", mapQuery: "" }
             ]
+        };
+
+        const routeData = {
+            1: {
+                title: "🗺️ Day 1 完整行程路線圖",
+                embedUrl: "https://maps.google.com/maps?saddr=金都餐廳+埔里&daddr=福興溫泉區親子公園+to:悠森境渡假村+to:埔里城觀光夜市+南投&output=embed",
+                linkUrl: "https://www.google.com/maps/dir/金都餐廳/福興溫泉區親子公園/悠森境渡假村/埔里城觀光夜市/"
+            },
+            2: {
+                title: "🗺️ Day 2 完整行程路線圖",
+                embedUrl: "https://maps.google.com/maps?saddr=悠森境渡假村+南投&daddr=水与松萌萌園+to:埔里四季蒸宴+南投+to:機器人創藝園區+to:埔里酒廠&output=embed",
+                linkUrl: "https://www.google.com/maps/dir/悠森境渡假村/水与松萌萌園/埔里四季蒸宴/機器人創藝園區/埔里酒廠/"
+            }
         };
 
         let currentActiveId = null;
@@ -361,11 +351,11 @@
             listContainer.innerHTML = '';
             const items = dayNumber === 1 ? itineraryData.day1 : itineraryData.day2;
 
-            items.forEach((item, index) => {
+            items.forEach((item) => {
                 const div = document.createElement('div');
                 div.className = `timeline-item border-l-4 border-gray-300 pl-4 py-4 mb-3 rounded-r bg-white shadow-sm flex flex-col gap-1`;
                 div.id = `item-${item.id}`;
-                div.onclick = () => selectItem(item, dayNumber);
+                div.onclick = () => selectItem(item);
 
                 div.innerHTML = `
                     <div class="flex justify-between items-center w-full">
@@ -377,13 +367,12 @@
             });
 
             if (items.length > 0) {
-                selectItem(items[0], dayNumber);
+                selectItem(items[0]);
             }
         }
 
-        function selectItem(item, dayNumber) {
+        function selectItem(item) {
             const panel = document.getElementById('detail-panel');
-            
             panel.classList.remove('fade-in');
             void panel.offsetWidth; 
             panel.classList.add('fade-in');
@@ -391,19 +380,8 @@
             document.getElementById('detail-icon').textContent = item.icon;
             document.getElementById('detail-title').textContent = item.title;
             document.getElementById('detail-time').textContent = item.time;
-            
-            // 處理車程緩衝顯示
-            const transitBadge = document.getElementById('detail-transit');
-            if (item.transit && item.transit !== "") {
-                transitBadge.textContent = "🚙 " + item.transit;
-                transitBadge.classList.remove('hidden');
-            } else {
-                transitBadge.classList.add('hidden');
-            }
-
             document.getElementById('detail-desc').textContent = item.desc;
 
-            // 處理 Google Map 顯示
             const mapContainer = document.getElementById('detail-map-container');
             const mapEl = document.getElementById('detail-map');
             if (item.mapQuery) {
@@ -413,20 +391,10 @@
                 mapContainer.classList.add('hidden');
             }
             
-            const tipsContainer = document.getElementById('detail-tips-container');
-            const tipsEl = document.getElementById('detail-tips');
-            if (item.tips && item.tips.trim() !== '') {
-                tipsEl.textContent = item.tips;
-                tipsContainer.style.display = 'block';
-            } else {
-                tipsContainer.style.display = 'none';
-            }
-
             if (currentActiveId) {
                 const oldActive = document.getElementById(`item-${currentActiveId}`);
                 if (oldActive) oldActive.classList.remove('active');
             }
-            
             const newActive = document.getElementById(`item-${item.id}`);
             if (newActive) newActive.classList.add('active');
             currentActiveId = item.id;
@@ -440,7 +408,6 @@
                 btn1.classList.replace('text-gray-500', 'text-primary');
                 btn1.classList.replace('border-transparent', 'border-primary');
                 btn1.classList.replace('bg-gray-50', 'bg-white');
-                
                 btn2.classList.replace('text-primary', 'text-gray-500');
                 btn2.classList.replace('border-primary', 'border-transparent');
                 btn2.classList.replace('bg-white', 'bg-gray-50');
@@ -448,39 +415,23 @@
                 btn2.classList.replace('text-gray-500', 'text-primary');
                 btn2.classList.replace('border-transparent', 'border-primary');
                 btn2.classList.replace('bg-gray-50', 'bg-white');
-                
                 btn1.classList.replace('text-primary', 'text-gray-500');
                 btn1.classList.replace('border-primary', 'border-transparent');
                 btn1.classList.replace('bg-white', 'bg-gray-50');
             }
 
+            document.getElementById('daily-route-title').textContent = routeData[dayNumber].title;
+            document.getElementById('daily-route-map').src = routeData[dayNumber].embedUrl;
+            document.getElementById('daily-route-link').href = routeData[dayNumber].linkUrl;
             renderTimeline(dayNumber);
-            updateDailyRoute(dayNumber);
-        }
-
-        function updateDailyRoute(dayNumber) {
-            const mapEl = document.getElementById('daily-route-map');
-            const linkEl = document.getElementById('daily-route-link');
-            const titleEl = document.getElementById('daily-route-title');
-
-            if (dayNumber === 1) {
-                titleEl.innerHTML = "🗺️ Day 1 完整行程導航總覽";
-                // 串接 Day 1 的所有景點導航
-                linkEl.href = "https://www.google.com/maps/dir/沙鹿交流道/金都餐廳/福興溫泉區親子公園/悠森境渡假村/埔里城觀光夜市/";
-                mapEl.src = "https://maps.google.com/maps?saddr=沙鹿交流道&daddr=金都餐廳+埔里+to:福興溫泉區親子公園+to:悠森境渡假村+to:埔里城觀光夜市+南投&output=embed";
-            } else {
-                titleEl.innerHTML = "🗺️ Day 2 完整行程導航總覽";
-                // 串接 Day 2 的所有景點導航
-                linkEl.href = "https://www.google.com/maps/dir/悠森境渡假村/水与松萌萌園/埔里四季蒸宴/機器人創藝園區/埔里酒廠/";
-                mapEl.src = "https://maps.google.com/maps?saddr=悠森境渡假村+南投&daddr=水与松萌萌園+to:埔里四季蒸宴+to:機器人創藝園區+to:埔里酒廠&output=embed";
-            }
         }
 
         document.addEventListener('DOMContentLoaded', () => {
             renderTimeline(1);
-            updateDailyRoute(1);
+            document.getElementById('daily-route-title').textContent = routeData[1].title;
+            document.getElementById('daily-route-map').src = routeData[1].embedUrl;
+            document.getElementById('daily-route-link').href = routeData[1].linkUrl;
         });
-
     </script>
 </body>
 </html>
